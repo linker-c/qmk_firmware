@@ -95,7 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_DEL,
   KC_CAPS,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
   KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RSFT_T(KC_ENT),
-  RGB_TOG, KC_LCTL, KC_LALT, KC_LGUI, TD(TD_LOWER),   KC_SPC,  KC_SPC,  TD(TD_RAISE),   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
+  RGB_MOD, KC_LCTL, KC_LALT, KC_LGUI, TD(TD_LOWER),   KC_SPC,  KC_SPC,  TD(TD_RAISE),   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
 ),
 
 /* Colemak
@@ -158,7 +158,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TILD, KC_EXLM, KC_AT,   KC_LBRC, KC_LCBR, KC_LPRN, KC_RPRN, KC_RBRC, KC_RCBR, KC_LBRC, KC_RBRC, KC_DEL,
   KC_CAPS, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE,
   _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,S(KC_NUHS),S(KC_NUBS),KC_HOME, KC_END, _______,
-  RGB_TOG, OS_TOGG, NK_TOGG, _______, _______, _______, _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY
+  RGB_MOD, OS_TOGG, NK_TOGG, _______, _______, _______, _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY
 ),
 
 /* Raise
@@ -171,7 +171,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |      |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |ISO # |ISO / | Pg Up| Pg Dn|      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |RGB_TOG|      |      |      |      | RGB_MOD+   |      | Hue- | Sat- | Sat+ | Hue+ |
+ * |RGB_MOD|      |      |      |      |           |       | Next | Vol- | Vol+ | Play |
  * `-----------------------------------------------------------------------------------'
  */
 [_RAISE] = LAYOUT_preonic_grid(
@@ -179,7 +179,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL,
   KC_CAPS,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS,
   _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_NUHS, KC_NUBS, KC_PGUP, KC_PGDN, _______,
-  RGB_TOG, _______, _______, _______, _______, RGB_MOD, RGB_MOD , _______, RGB_HUD, RGB_SAD, RGB_SAI, RGB_HUI 
+  RGB_MOD, _______, _______, _______, _______, _______, _______ , _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY
 ),
 
 /* Adjust (Lower + Raise)
@@ -192,7 +192,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |      |Voice-|Voice+|Mus on|MusOff|MidiOn|MidOff|      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |             |      |      |      |      |      |
+ * |RGB_TOG|      |      |      |      |            |      | Hue- | Sat- | Sat+ | Hue+ |
  * `-----------------------------------------------------------------------------------'
  */
 [_ADJUST] = LAYOUT_preonic_grid(
@@ -200,11 +200,81 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, RESET,   DEBUG,   _______, _______, _______, _______, TERM_ON, TERM_OFF,_______, _______, KC_DEL,
   _______, _______, MU_MOD,  AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, QWERTY,  COLEMAK, DVORAK,  _______, _______,
   _______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  _______, _______, _______, _______, _______,
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+  RGB_TOG, _______, _______, _______, _______, _______, _______, _______, RGB_HUD, RGB_SAD, RGB_SAI, RGB_HUI
 )
 
-
 };
+
+// #define LAYER_VAL 120
+
+// Define led segments for each layer
+// const rgblight_segment_t PROGMEM capslock_segments[] = RGBLIGHT_LAYER_SEGMENTS(
+// 	{4, 5, 0, 255, LAYER_VAL}
+// );
+// const rgblight_segment_t PROGMEM lower_segments[] = RGBLIGHT_LAYER_SEGMENTS(
+// 	{0, 8, 10, 255, LAYER_VAL}
+// );
+// const rgblight_segment_t PROGMEM raise_segments[] = RGBLIGHT_LAYER_SEGMENTS(
+// 	{0, 8, 85, 255, LAYER_VAL}
+// );
+
+// const rgblight_segment_t PROGMEM adjust_segments[] = RGBLIGHT_LAYER_SEGMENTS(
+// 	{0, 8, 20, 255, LAYER_VAL}
+// );
+
+const rgblight_segment_t PROGMEM lower_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 8, HSV_RED});
+
+const rgblight_segment_t PROGMEM raise_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 8, HSV_GREEN});
+
+// const rgblight_segment_t PROGMEM adjust_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 8, HSV_BLUE});
+
+const rgblight_segment_t PROGMEM capslock_layer[] = RGBLIGHT_LAYER_SEGMENTS({4, 5, HSV_YELLOW});
+
+// Now define the array of layers. Later layers take precedence
+const rgblight_segment_t* const PROGMEM mod_led_layers[] = RGBLIGHT_LAYERS_LIST(
+	capslock_layer,
+	lower_layer,
+	raise_layer
+	// adjust_layer
+);
+
+void keyboard_post_init_user(void) {
+	// Enable the LED layers
+	rgblight_layers = mod_led_layers;
+}
+
+#define BIT_SET(intval, bitnum) ((intval & (1 << bitnum)) > 0)
+#define ADJUST_STATE    ((1<<_ADJUST) | (1<<_LOWER) | (1<<_RAISE))
+// Use the RGBLight layers feature to indicate active layers
+uint32_t layer_state_set_user(uint32_t state) {
+	// uprintf("layer state: %d\n", state);
+	rgblight_set_layer_state(1, BIT_SET(state, _LOWER));
+	rgblight_set_layer_state(2, BIT_SET(state, _RAISE));
+	// rgblight_set_layer_state(3, BIT_SET(state, _ADJUST));
+    if (state == ADJUST_STATE) {
+        // If we are in ADJUST state, that means both layers keys are depressed.
+        // There's no reason to have LED for this layer since the user is actively pressing
+        // the keys.
+        // Plus I'm using the ADJUST layer to set HUE and SATURATION with arrow keys.
+        // It makes sense to be in default layer's led pattern so the user can see the
+        // led color being adjusted real time.=
+        // uprintf("ADJUST state");
+        rgblight_set_layer_state(1,false);
+        rgblight_set_layer_state(2,false);
+    }
+	// This isn't required but it improves the responsiveness
+	rgblight_set();
+  	return state;
+}
+
+// Called when the host computer indicates an LED should change state.
+// This didn't work until I checked "Manipulate LED" in Karabiner Elements preferences
+bool led_update_user(led_t led_state) {
+	// uprintf("Caps_lock = %s  (%d)\n", led_state.caps_lock ? "ON": "OFF", led_state.raw);
+	rgblight_set_layer_state(0, led_state.caps_lock);
+	rgblight_set();
+	return true;
+}
 
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -465,60 +535,3 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_LOWER] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, tdlower_pressed, tdlower_reset),
     [TD_RAISE] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, tdraise_pressed, tdraise_reset)
 };
-
-#if 0
-void keyboard_post_init_user(void) {
-  // Call the keymap level matrix init.
-
-    /*
-  // Read the user config from EEPROM
-  user_config.raw = eeconfig_read_user();
-
-  // Set default layer, if enabled
-  if (user_config.rgb_layer_change) {
-    rgblight_enable_noeeprom();
-    rgblight_sethsv_noeeprom_cyan();
-    rgblight_mode_noeeprom(1);
-  }
-  */
-    saved_config = rgblight_config;
-    
-}
-#endif
-/*
-layer_state_t layer_state_set_user(layer_state_t state) {
-    switch (get_highest_layer(state)) {
-    case _RAISE:
-        //if (user_config.rgb_layer_change) { rgblight_sethsv_noeeprom_magenta(); rgblight_mode_noeeprom(1); }
-        rgblight_setrgb (0x00,  0x00, 0xFF);
-        break;
-    case _LOWER:
-        //if (user_config.rgb_layer_change) { rgblight_sethsv_noeeprom_red(); rgblight_mode_noeeprom(1); }
-        rgblight_setrgb (0xFF,  0x00, 0x00);
-        break;
-//    case _PLOVER:
-//        if (user_config.rgb_layer_change) { rgblight_sethsv_noeeprom_green(); rgblight_mode_noeeprom(1); }
-//        break;
-//    case _ADJUST:
-//        if (user_config.rgb_layer_change) { rgblight_sethsv_noeeprom_white(); rgblight_mode_noeeprom(1); }
-//        break;
-    default: //  for any other layers, or the default layer
-        //if (user_config.rgb_layer_change) { rgblight_sethsv_noeeprom_cyan(); rgblight_mode_noeeprom(1); }
-        rgblight_mode(saved_config.mode);
-        break;
-    }
-  return state;
-}
-*/
-/*
-void eeconfig_init_user(void) {  // EEPROM is getting reset!
-  user_config.raw = 0;
-  user_config.rgb_layer_change = true; // We want this enabled by default
-  eeconfig_update_user(user_config.raw); // Write default value to EEPROM now
-
-  // use the non noeeprom versions, to write these values to EEPROM too
-  rgblight_enable(); // Enable RGB by default
-  rgblight_sethsv_cyan();  // Set it to CYAN by default
-  rgblight_mode(1); // set to solid by default
-}
-*/

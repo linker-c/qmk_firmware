@@ -49,3 +49,11 @@
 
 #define TAPPING_TERM 200
 // testing
+
+// #define RGBLIGHT_LED_MAP { 0,  1,  2,  3,  4,  5,  6,  7, 8 }
+#define RGBLIGHT_LED_MAP {8, 2, 3, 7, 6, 5, 4, 0, 1}
+// Try to get the rgb lights to turn off when the computer is sleeping. Doesn't seem to work reliably.
+#define RGBLIGHT_SLEEP
+
+// Enable lighting layers
+#define RGBLIGHT_LAYERS
