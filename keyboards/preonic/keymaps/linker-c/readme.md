@@ -26,6 +26,7 @@ See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_to
 What I have changed.
 
 1) Tap Dnace
+
 Added tap dance for layer change keys.  I experienced with using one shot key and it
 didn't perform as desirable.  I ended up using tab dance and it simplified the coding a lot.
 
@@ -33,12 +34,15 @@ I needed to use one tab for the "return" key to dub as right shift due to the li
 MOD_TAP is a build in modifier that helps solving it for me.
 
 2) Per layer RGB lighting
+
 It would be nice to have different led pattern when the layer is switched.  It helps minimizing mistakes
 when using scaled down keyboards that requires layers.
 All the examples I could find online use fixed LED patern/color on layers.  Base layer is more flexible.
 But I wanted the ADJUST layer to be the same as base layer because I assigned Hue & Saturation keys on
 the ADJUST (both RAISE & LOWER keys pressed) layer.  So it's crucial to use the base layer's untouched
 LED pattern so I can see the LED being adjusted live.
-I also fixed the left 4 LEDs when CAPS is enabled. 
+On RAISE layer, only the upper 4 LEDs will light up.
+On LOWER layer, only the bottom 4 LEDs will light up.
+On CAPs layer, only the left 2 upper & 2 bottom (left side) LEDs will light up.
 
 
