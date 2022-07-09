@@ -205,30 +205,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
-// #define LAYER_VAL 120
 
-// Define led segments for each layer
-// const rgblight_segment_t PROGMEM capslock_segments[] = RGBLIGHT_LAYER_SEGMENTS(
-// 	{4, 5, 0, 255, LAYER_VAL}
-// );
-// const rgblight_segment_t PROGMEM lower_segments[] = RGBLIGHT_LAYER_SEGMENTS(
-// 	{0, 8, 10, 255, LAYER_VAL}
-// );
-// const rgblight_segment_t PROGMEM raise_segments[] = RGBLIGHT_LAYER_SEGMENTS(
-// 	{0, 8, 85, 255, LAYER_VAL}
-// );
-
-// const rgblight_segment_t PROGMEM adjust_segments[] = RGBLIGHT_LAYER_SEGMENTS(
-// 	{0, 8, 20, 255, LAYER_VAL}
-// );
-
-const rgblight_segment_t PROGMEM lower_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 8, HSV_RED});
-
-const rgblight_segment_t PROGMEM raise_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 8, HSV_GREEN});
+// check rev3_drop.c for LED location and order
+// LED physical location index from back of the board.
+//     6 5 4 3
+//        0
+//     7 8 1 2
+// configure all 9 leds to the same color per layer
+const rgblight_segment_t PROGMEM lower_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 9, HSV_RED});
+const rgblight_segment_t PROGMEM raise_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 9, HSV_GREEN});
 
 // const rgblight_segment_t PROGMEM adjust_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 8, HSV_BLUE});
 
-const rgblight_segment_t PROGMEM capslock_layer[] = RGBLIGHT_LAYER_SEGMENTS({4, 5, HSV_YELLOW});
+// starting on led index 5 and configure 4 leds to yellow
+const rgblight_segment_t PROGMEM capslock_layer[] = RGBLIGHT_LAYER_SEGMENTS({5, 4, HSV_YELLOW});
 
 // Now define the array of layers. Later layers take precedence
 const rgblight_segment_t* const PROGMEM mod_led_layers[] = RGBLIGHT_LAYERS_LIST(
