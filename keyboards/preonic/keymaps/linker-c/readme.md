@@ -22,6 +22,8 @@ See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_to
 
 
 ===========================================================================================
+What I have changed.
+
 1) Tap Dnace
 Added tap dance for layer change keys.  I experienced with using one shot key and it
 didn't perform as desirable.  I ended up using tab dance and it simplified the coding a lot.
