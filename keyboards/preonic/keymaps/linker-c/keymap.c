@@ -207,18 +207,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 // check rev3_drop.c for LED location and order
-// LED physical location index from back of the board.
+// LED physical location index
 //     6 5 4 3
 //        0
 //     7 8 1 2
-// configure all 9 leds to the same color per layer
-const rgblight_segment_t PROGMEM lower_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 9, HSV_RED});
-const rgblight_segment_t PROGMEM raise_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 9, HSV_GREEN});
+
+// light up only the upper 4 LEDs
+const rgblight_segment_t PROGMEM raise_layer[] =
+            RGBLIGHT_LAYER_SEGMENTS({0, 9, HSV_BLACK},{3, 4, HSV_RED});
+// light up buttom 4 LEDs
+const rgblight_segment_t PROGMEM lower_layer[] =
+            RGBLIGHT_LAYER_SEGMENTS({0, 9, HSV_BLACK},{7, 2, HSV_GREEN},{1, 2, HSV_GREEN});
+// light up left 2 upper and 2 lower LEDs
+const rgblight_segment_t PROGMEM capslock_layer[] =
+            RGBLIGHT_LAYER_SEGMENTS({0, 9, HSV_BLACK},{5, 4, HSV_BLUE});
 
 // const rgblight_segment_t PROGMEM adjust_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 8, HSV_BLUE});
 
-// starting on led index 5 and configure 4 leds to yellow
-const rgblight_segment_t PROGMEM capslock_layer[] = RGBLIGHT_LAYER_SEGMENTS({5, 4, HSV_YELLOW});
 
 // Now define the array of layers. Later layers take precedence
 const rgblight_segment_t* const PROGMEM mod_led_layers[] = RGBLIGHT_LAYERS_LIST(
@@ -234,24 +239,27 @@ void keyboard_post_init_user(void) {
 }
 
 #define BIT_SET(intval, bitnum) ((intval & (1 << bitnum)) > 0)
-#define ADJUST_STATE    ((1<<_ADJUST) | (1<<_LOWER) | (1<<_RAISE))
+// #define ADJUST_STATE    ((1<<_ADJUST) | (1<<_LOWER) | (1<<_RAISE))
 // Use the RGBLight layers feature to indicate active layers
 uint32_t layer_state_set_user(uint32_t state) {
-	// uprintf("layer state: %d\n", state);
-	rgblight_set_layer_state(1, BIT_SET(state, _LOWER));
-	rgblight_set_layer_state(2, BIT_SET(state, _RAISE));
-	// rgblight_set_layer_state(3, BIT_SET(state, _ADJUST));
-    if (state == ADJUST_STATE) {
+	uprintf("layer state: %d\n", state);
+
+    if (BIT_SET(state, _ADJUST)) {
         // If we are in ADJUST state, that means both layers keys are depressed.
         // There's no reason to have LED for this layer since the user is actively pressing
         // the keys.
         // Plus I'm using the ADJUST layer to set HUE and SATURATION with arrow keys.
         // It makes sense to be in default layer's led pattern so the user can see the
         // led color being adjusted real time.=
-        // uprintf("ADJUST state");
+        uprintf("ADJUST state");
         rgblight_set_layer_state(1,false);
         rgblight_set_layer_state(2,false);
+        // rgblight_set_layer_state(3, BIT_SET(state, _ADJUST));
+    } else {
+        rgblight_set_layer_state(1, BIT_SET(state, _LOWER));
+        rgblight_set_layer_state(2, BIT_SET(state, _RAISE));
     }
+
 	// This isn't required but it improves the responsiveness
 	rgblight_set();
   	return state;
@@ -260,7 +268,7 @@ uint32_t layer_state_set_user(uint32_t state) {
 // Called when the host computer indicates an LED should change state.
 // This didn't work until I checked "Manipulate LED" in Karabiner Elements preferences
 bool led_update_user(led_t led_state) {
-	// uprintf("Caps_lock = %s  (%d)\n", led_state.caps_lock ? "ON": "OFF", led_state.raw);
+	uprintf("Caps_lock = %s  (%d)\n", led_state.caps_lock ? "ON": "OFF", led_state.raw);
 	rgblight_set_layer_state(0, led_state.caps_lock);
 	rgblight_set();
 	return true;
